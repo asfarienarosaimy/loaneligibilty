@@ -3,17 +3,18 @@ import pandas as pd
 import joblib
 
 # Load the trained pipeline
-pipeline = joblib.load('rf_model_pipeline.pkl')
-
-# Extract available optiosn for categorical fetaures
-preprocessor = pipeline.named_steps['preprocessor']
-one_hot_encoder = preprocessor.named_transformers_['cat']
-categories = one_hot_encoder.categories_
+try:
+    pipeline = joblib.load('rf_model_pipeline.pkl')
+    preprocessor = pipeline.named_steps['preprocessor']
+    one_hor_encoder = preprocessor.named_transformer_['cat']
+    categories = one_hot_encoder.categories_
+except Exception as e :
+    st.error(f"Error loading model: {e}")
+    st.stop()
 
 # Streamlit app
 st.title("Loan Eligibility Prediction using Machine Learning")
 st.caption('Fill the form below to start a prediction')
-import streamlit as st
 
 # Input field for categorical feature
 Gender = st.selectbox("Select Gender", categories[0])
@@ -26,7 +27,8 @@ Self_Employed = st.selectbox("Select Self_Employed", categories[6])
 Credit_History = st.selectbox("Select Credit_History", categories[7])
 
 # Input field for numerical feature
-
+LoanAmount = st.number_input("Enter Loan Amount", min_value=0, step=1)
+ApplicantIncome = st.number_input("Enter Applicant Income", min_value=0, step=1)
 
 # Create raw input DataFrame
 input_data = pd.DataFrame({
