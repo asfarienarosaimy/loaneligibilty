@@ -3,9 +3,7 @@ import streamlit as st
 
 
 st.set_page_config(
-    {
-        page_title = 'Loan Prediction',
-}
+    page_title = 'Loan Prediction',
 
 )
 
