@@ -1,4 +1,5 @@
-joblib
+imblearn
 scikit-learn
 pandas 
 streamlit
+numpy
