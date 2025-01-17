@@ -5,9 +5,24 @@ import joblib
 # Load the trained pipeline
 try:
     pipeline = joblib.load('rf_model_pipeline.pkl')
+    st.write("Pipeline Structure:", pipeline)
+
+    # Check if 'preprocessor' exists
+    if 'preprocessor' not in pipeline.named_steps:
+        st.error("The pipeline does not have a 'preprocessor' step.")
+        st.stop()
+
     preprocessor = pipeline.named_steps['preprocessor']
-    one_hor_encoder = preprocessor.named_transformers_['cat'] # Fixed plural issue
-    categories = one_hot_encoder.categories_ 
+    st.write("Preprocessor Structure:", preprocessor)
+
+    # Check for a transformer handling categorical features
+    if 'cat' in preprocessor.named_transformers_:
+        one_hot_encoder = preprocessor.named_transformers_['cat']
+        categories = one_hot_encoder.categories_
+    else:
+        st.error("The preprocessor does not have a transformer named 'cat'.")
+        st.stop()
+
 except Exception as e :
     st.error(f"Error loading model: {e}")
     st.stop()
