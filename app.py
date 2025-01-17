@@ -1,4 +1,8 @@
 import streamlit as st
 
-st.title('TEST')
 
+
+st.set_page_config
+{
+    page_title = 'Loan Prediction',
+}
