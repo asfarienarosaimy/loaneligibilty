@@ -7,3 +7,13 @@ st.set_page_config(
 
 )
 
+eda = st.Page('eda.py', title="Data Visualization", icon="📊")
+predict = st.Page('predicts.py', title='Loan Predictions',icon='🥔')
+
+pg = st.navigation(
+    {
+        "Menu":[eda,predict]
+    }
+)
+                     
+
