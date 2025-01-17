@@ -1,5 +1,5 @@
-imblearn
-scikit-learn
-pandas 
 streamlit
+pandas
 numpy
+joblib
+scikit-learn
