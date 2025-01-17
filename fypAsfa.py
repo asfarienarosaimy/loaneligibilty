@@ -31,9 +31,7 @@ def load_data():
     return X, y
 
 # Load the pre-trained model from a pickle file
-def load_model():
-    with open('logistic_regression_model.pkl', 'rb') as file:
-        return pickle.load(file)
+loaded_model=pickle.load(open('logistic_regression_model.pkl','rb'))
 
 # Streamlit app
 def main():
