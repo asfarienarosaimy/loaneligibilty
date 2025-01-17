@@ -15,5 +15,6 @@ pg = st.navigation(
         "Menu":[eda,predict]
     }
 )
-                     
+
+pg.run()                 
 
