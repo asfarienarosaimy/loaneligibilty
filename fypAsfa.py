@@ -80,6 +80,18 @@ def main():
 
     user_df = pd.DataFrame.from_dict(user_data)
 
+    # Match columns with training data
+    expected_columns = [
+        "Gender", "Married", "Dependents_0", "Dependents_1", "Dependents_2", "Dependents_3+",
+        "Education", "Self_Employed", "ApplicantIncome", "CoapplicantIncome", "LoanAmount",
+        "Loan_Amount_Term", "Credit_History", "Property_Area_Rural", "Property_Area_Semiurban",
+        "Property_Area_Urban"
+    ]
+    for col in expected_columns:
+        if col not in user_df.columns:
+            user_df[col] = 0  # Add missing columns with default value 0
+    user_df = user_df[expected_columns]  # Ensure correct column order
+    
     # Drop unnecessary columns for prediction
     user_df = user_df.drop(columns=["Property_Area_Rural", "Property_Area_Semiurban", "Property_Area_Urban"])
 
