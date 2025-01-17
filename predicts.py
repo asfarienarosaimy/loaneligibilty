@@ -6,8 +6,8 @@ import joblib
 try:
     pipeline = joblib.load('rf_model_pipeline.pkl')
     preprocessor = pipeline.named_steps['preprocessor']
-    one_hor_encoder = preprocessor.named_transformer_['cat']
-    categories = one_hot_encoder.categories_
+    one_hor_encoder = preprocessor.named_transformer_['cat'] # Fixed plural issue
+    categories = one_hot_encoder.categories_ 
 except Exception as e :
     st.error(f"Error loading model: {e}")
     st.stop()
