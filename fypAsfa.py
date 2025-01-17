@@ -100,13 +100,6 @@ def main():
         else:
             st.error("Loan Rejected")
 
-    # Metrics section
-    if st.checkbox("Show Model Metrics"):
-        y_pred = model.predict(X_test)
-        st.text("Classification Report:")
-        st.text(classification_report(y_test, y_pred))
-        st.text("Confusion Matrix:")
-        st.write(confusion_matrix(y_test, y_pred))
-
 if __name__ == "__main__":
     main()
+    
