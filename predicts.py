@@ -39,3 +39,10 @@ input_data = pd.DataFrame({
     'Self_Employed': [Self_Employed],
     'Credit_History': [Credit_History]
 })
+
+if st.button("predict"):
+    try:
+        prediction = pipeline.predict(input_data)[0]
+        st.success("Predicted {prediction}")
+    except Exception as e:
+        st.error("error: {e}")
