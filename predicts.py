@@ -1,5 +1,6 @@
 import joblib
 import streamlit as st
+import pandas as pd
 
 # Load the trained pipeline
 pipeline = joblib.load('rf_model_pipeline.pkl')
