@@ -1,13 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
-from imblearn.over_sampling import SMOTE
+import pickle
 from sklearn.metrics import classification_report, confusion_matrix
 
-# Load and preprocess the dataset
+# Load and preprocess the dataset (if needed for metrics or additional functionality)
 def load_data():
     df = pd.read_csv("loan_data_set.csv")
     df['Gender'].fillna(df['Gender'].mode()[0], inplace=True)
@@ -31,26 +28,20 @@ def load_data():
     X = df.drop(["Loan_Status"], axis=1)
     y = df["Loan_Status"]
 
-    X, y = SMOTE().fit_resample(X, y)
-    scaler = MinMaxScaler()
-    X = scaler.fit_transform(X)
+    return X, y
 
-    return train_test_split(X, y, test_size=0.2, random_state=0)
-
-# Train the logistic regression model
-def train_model(X_train, y_train):
-    model = LogisticRegression(solver='saga', max_iter=500, random_state=1)
-    model.fit(X_train, y_train)
-    return model
+# Load the pre-trained model from a pickle file
+def load_model():
+    with open('logistic_regression_model.pkl', 'rb') as file:
+        return pickle.load(file)
 
 # Streamlit app
 def main():
     st.title("Loan Eligibility Prediction")
     st.write("This application predicts loan eligibility based on applicant details.")
 
-    # Load data and train model
-    X_train, X_test, y_train, y_test = load_data()
-    model = train_model(X_train, y_train)
+    # Load the pre-trained model
+    model = load_model()
 
     # User input form
     st.header("Enter Applicant Details")
