@@ -46,7 +46,7 @@ def preprocess_inputs():
         'Credit_History': [Credit_History],
         'Property_Area': [Property_Area]
     }
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
 
 # Perform one-hot encoding for categorical features
 df = pd.get_dummies(df, columns = ['Property_Area'], frop_first = False)
