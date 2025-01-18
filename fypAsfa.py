@@ -48,6 +48,20 @@ def preprocess_inputs():
     }
     return pd.DataFrame(data)
 
+# Perform one-hot encoding for categorical features
+df = pd.get_dummies(df, columns = ['Property_Area'], frop_first = False)
+
+# Ensure all expected columns are present
+expected_columns = ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed',
+                        'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term',
+                        'Credit_History', 'Property_Area_Rural', 'Property_Area_Semiurban', 'Property_Area_Urban']
+for col in expected_columns:
+    if col not in df.columns:
+        df[col] = 0 # Add missing columns with default value
+
+# Ensure columns are in the correct order
+return df[expected_columns]
+
 # Prediction
 def predict():
     input_data = preprocess_inputs()
